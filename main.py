@@ -49,9 +49,9 @@ def main(args=args, logger=logger):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     n_gpu = torch.cuda.device_count()
     if torch.cuda.is_available():
-        print("device is cuda, # cuda is: ", n_gpu)
+        logger.info("device is cuda, # cuda is: ", n_gpu)
     else:
-        print("device is cpu")
+        logger.info("device is cpu")
 
     # process word vectors and datasets
     if not args.processed_data:
@@ -63,14 +63,14 @@ def main(args=args, logger=logger):
     cv_tensor = torch.FloatTensor(
         np.array(pickle_load_large_file(args.char_emb_file), dtype=np.float32))
     wv_word2ix = pickle_load_large_file(args.word_dictionary)
-    print(wv_tensor.shape, cv_tensor.shape, len(wv_word2ix))
+    logger.info(wv_tensor.shape, cv_tensor.shape, len(wv_word2ix))
 
     # load datasets
     train_dataloader = get_loader(
         args.train_examples_file, args.batch_size, shuffle=True)
     dev_dataloader = get_loader(
         args.dev_examples_file, args.batch_size, shuffle=True)
-    print(len(train_dataloader), len(dev_dataloader))
+    logger.info(len(train_dataloader), len(dev_dataloader))
 
     # load model
     model = QANet(
@@ -87,7 +87,7 @@ def main(args=args, logger=logger):
 
     if torch.cuda.device_count() > 1 and args.multi_gpu:
         model = nn.DataParallel(model)
-    print(model)
+    logger.info(model)
     model.to(device)
 
     # exponential moving average
@@ -128,7 +128,7 @@ def main(args=args, logger=logger):
 
     start = datetime.now()
     trainer.train()
-    print("Time of training model ", datetime.now() - start)
+    logger.info("Time of training model ", datetime.now() - start)
 
 
 if __name__ == "__main__":
