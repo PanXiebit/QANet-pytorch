@@ -21,7 +21,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 def get_logger():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
-    fh = logging.FileHandler('qanet.log')
+    fh = logging.FileHandler('qanet_ema.log')
     fh.setLevel(logging.INFO)
     ch = logging.StreamHandler()
     ch.setLevel(logging.INFO)
@@ -63,14 +63,14 @@ def main(args=args, logger=logger):
     cv_tensor = torch.FloatTensor(
         np.array(pickle_load_large_file(args.char_emb_file), dtype=np.float32))
     wv_word2ix = pickle_load_large_file(args.word_dictionary)
-    logger.info(wv_tensor.shape, cv_tensor.shape, len(wv_word2ix))
+    print(wv_tensor.shape, cv_tensor.shape, len(wv_word2ix))
 
     # load datasets
     train_dataloader = get_loader(
         args.train_examples_file, args.batch_size, shuffle=True)
     dev_dataloader = get_loader(
         args.dev_examples_file, args.batch_size, shuffle=True)
-    logger.info(len(train_dataloader), len(dev_dataloader))
+    print(len(train_dataloader), len(dev_dataloader))
 
     # load model
     model = QANet(
@@ -87,7 +87,7 @@ def main(args=args, logger=logger):
 
     if torch.cuda.device_count() > 1 and args.multi_gpu:
         model = nn.DataParallel(model)
-    logger.info(model)
+    print(model)
     model.to(device)
 
     # exponential moving average

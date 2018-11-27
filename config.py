@@ -148,7 +148,7 @@ parser.add_argument(
     help='verbosity, 0: quiet, 1: per epoch, 2: complete (default: 2)')
 parser.add_argument(
     '--save_dir',
-    default='checkpoints_2/', type=str,
+    default='checkpoints_1/', type=str,
     help='directory of saved model (default: checkpoints/)')
 parser.add_argument(
     '--save_freq',
