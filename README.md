@@ -40,8 +40,8 @@ python3 main.py --with_cuda --batch_size 16 --multi_gpu --use_ema
 |Experimenter|git SHA|Background Search Method|Model|F1|EM|Notes|examples/seconds|
 |--|--|--|--|---|---|--|--|
 |PanXie|a0c87ba|base model|QANet|78.52|69.13|static PosEnocder, patience 30|35/s|
-|PanXie|ff39d3a|without ema|QANet|75.29|64.38|static PosEnocder, patience 19|35/s|
-|PanXie|ff39d3a|head=1|QANet|77.10|66.91|static PosEnocder, patience 25|35/s|
+|PanXie|ff39d3a|without ema|QANet|75.29|64.38|static PosEnocder, patience 19|35/s
+|PanXie|7912256|head=1|QANet|77.10|66.91|static PosEnocder, patience 25|35/s|
 
 
 
