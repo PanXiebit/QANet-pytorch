@@ -36,6 +36,7 @@ def get_logger():
 logger = get_logger()
 
 args = parser.parse_args()
+print(args)
 
 def main(args=args, logger=logger):
     random_seed = None
@@ -49,9 +50,9 @@ def main(args=args, logger=logger):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     n_gpu = torch.cuda.device_count()
     if torch.cuda.is_available():
-        logger.info("device is cuda, # cuda is: ", n_gpu)
+        print("device is cuda, # cuda is: ", n_gpu)
     else:
-        logger.info("device is cpu")
+        print("device is cpu")
 
     # process word vectors and datasets
     if not args.processed_data:
@@ -128,7 +129,7 @@ def main(args=args, logger=logger):
 
     start = datetime.now()
     trainer.train()
-    logger.info("Time of training model ", datetime.now() - start)
+    print("Time of training model ", datetime.now() - start)
 
 
 if __name__ == "__main__":

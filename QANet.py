@@ -30,7 +30,9 @@ class QANet(nn.Module):
         self.emb_enc = EncoderBlock(conv_num=4, d_model=d_model, num_head=num_head, k=7, dropout=0.1)
         self.cq_att = CQAttention(d_model=d_model)
         self.cq_resizer = Initialized_Conv1d(d_model * 4, d_model)
-        self.model_enc_blks = nn.ModuleList([EncoderBlock(conv_num=2, d_model=d_model, num_head=num_head, k=5, dropout=0.1) for _ in range(7)])
+        self.model_enc_blks = nn.ModuleList(
+            [EncoderBlock(conv_num=2, d_model=d_model, num_head=num_head, k=5, dropout=0.1)
+             for _ in range(7)])
         self.out = Pointer(d_model)
         self.PAD = pad
         self.Lc = c_max_len

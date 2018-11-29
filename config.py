@@ -148,7 +148,7 @@ parser.add_argument(
     help='verbosity, 0: quiet, 1: per epoch, 2: complete (default: 2)')
 parser.add_argument(
     '--save_dir',
-    default='checkpoints_1/', type=str,
+    default='checkpoints_3/', type=str,
     help='directory of saved model (default: checkpoints/)')
 parser.add_argument(
     '--save_freq',
@@ -248,5 +248,5 @@ parser.add_argument(
     help='model hidden size')
 parser.add_argument(
     '--num_head',
-    default=8, type=int,
+    default=1, type=int,
     help='attention num head')
